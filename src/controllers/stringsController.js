@@ -20,4 +20,5 @@ exports.lowercasing = (req,res) => {
 exports.returningfirstCharacters = (req,res) =>{
     const length = req.query.length ? parseInt(req.query.length) : 1;
     const word = strings.firstCharacters(req.params.basename, length);
+    res.json({ result: `${word}` }).sendStatus(200);
 }
