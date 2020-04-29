@@ -1,73 +1,20 @@
 const express = require('express');
-const strings = require('./lib/strings.js');
-const numbersRouter = require('./routes/numbersRouter.js');
+//const strings = require('./lib/strings.js');
 const bool = require('./lib/booleans.js');
 const arr = require('./lib/arrays.js');
 
 const app = express();
+const numbersRouter = require('./routes/numbersRouter.js');
+const stringsRouter = require ('./routes/stringsRouter.js')
+
 
 app.use(express.json()); // FOR POST
-// app.use(bodyParser.json());
 
-app.get('/strings/hello/:basename', (req, res) => {
-  const word = strings.sayHello(req.params.basename);
+app.use('/strings', stringsRouter);
 
-  res.json({ result: `${word}` }).sendStatus(200);
-});
-
-app.get('/strings/upper/:basename', (req, res) => {
-  const word = strings.uppercase(req.params.basename);
-
-  res.json({ result: `${word}` }).sendStatus(200);
-});
-
-app.get('/strings/lower/:basename', (req, res) => {
-  const word = strings.lowercase(req.params.basename);
-
-  res.json({ result: `${word}` }).sendStatus(200);
-});
-
-app.get('/strings/first-characters/:basename', (req, res) => {
-  const length = req.query.length ? parseInt(req.query.length) : 1;
-  const word = strings.firstCharacters(req.params.basename, length);
-  res.json({ result: `${word}` }).sendStatus(200);
-
-  /* if (req.query.length) {
-    const n = parseInt(Object.values(req.query).join());
-    const word = strings.firstCharacters(req.params.basename, n);
-    res.json({ result: `${word}` }).sendStatus(200);
-  } else {
-    const word = strings.firstCharacter(req.params.basename);
-    res.json({ result: `${word}` }).sendStatus(200);
-  } */
-});
-//-----------------------------------------------
 app.use('/numbers', numbersRouter);
 
-//--------------------------------------------------
 
-  
-  
-
-//----------------------------------------------------
-app.post('/numbers/remainder', (req, res) => {
- 
-
-  /* const arr = Object.values(req.body);
-  const rem = numbers.remainder(arr[0], arr[1]);
-  if (arr[1] === 0) {
-    res.status(400).json({ error: 'Unable to divide by 0.' });
-  }
-  if (arr.length !== 2) {
-    res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
-  }
-  if (Number.isNaN(rem)) {
-    res.status(400).json({ error: 'Parameters must be valid numbers.' });
-  } else {
-    res.status(200).json({ result: rem });
-  } */
-});
-//----------------------------------------------------
 app.post('/booleans/negate', (req, res) => {
   const neg = bool.negate(req.body.value);
 
