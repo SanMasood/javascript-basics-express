@@ -7,7 +7,7 @@ exports.addNumbers = (req, res) => {
 
   return Number.isNaN(sum)
     ? res.status(400).json({ error: 'Parameters must be valid numbers.' })
-    : res.status(200).json({ result: add(num1, num2) });
+    : res.status(200).json({ result: sum });
 };
 
 exports.subtractNumbers = (req, res) => {
