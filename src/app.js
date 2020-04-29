@@ -1,6 +1,6 @@
 const express = require('express');
 const strings = require('./lib/strings.js');
-const numbers = require('./lib/numbers.js');
+const numbersRouter = require('./routes/numbersRouter.js');
 const bool = require('./lib/booleans.js');
 const arr = require('./lib/arrays.js');
 
@@ -42,101 +42,16 @@ app.get('/strings/first-characters/:basename', (req, res) => {
   } */
 });
 //-----------------------------------------------
-app.get('/numbers/add/:param1/and/:param2', (req, res) => {
-  const num1 = parseInt(req.params.param1);
-  const num2 = parseInt(req.params.param2);
-  const sum = numbers.add(num1, num2);
+app.use('/numbers', numbersRouter);
 
-  if (Number.isNaN(sum)) {
-    res.status(400).json({ error: 'Parameters must be valid numbers.' });
-  } else {
-    res.status(200).json({ result: sum });
-  }
-  // TO REMEMBER: sendStatus() closes the connection. You can only send body before it, not after. Instead use status to send body with or after status.
-});
 //--------------------------------------------------
 
-app.get('/numbers/subtract/:param1/from/:param2', (req, res) => {
-  const num1 = parseInt(req.params.param1);
-  const num2 = parseInt(req.params.param2);
-  const diff = numbers.subtract(num2, num1);
+  
+  
 
-  if (Number.isNaN(diff)) {
-    res.status(400).json({ error: 'Parameters must be valid numbers.' });
-  } else {
-    res.status(200).json({ result: diff });
-  }
-});
-//--------------------------------------------------
-app.post('/numbers/multiply', (req, res) => {
-  // const arr = Object.values(req.body);
-  const num1 = parseInt(req.body.a);
-  const num2 = parseInt(req.body.b);
-  // console.log({ num1, num2 });
-
-  const prod = numbers.multiply(num1, num2);
-
-  if (!req.body.a || !req.body.b) {
-    res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
-  }
-  if (Number.isNaN(prod)) {
-    res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
-  } else {
-    res.status(200).json({ result: prod });
-  }
-});
-//----------------------------------------------------
-app.post('/numbers/divide', (req, res) => {
-  /*
-  const arr = Object.values(req.body);
-  const div = numbers.divide(arr[0], arr[1]);
-  console.log ({div});
-
-  if (arr[1] === 0) {
-    res.status(400).json({ error: 'Unable to divide by 0.' });
-  }
-  if (arr.length !== 2) {
-    res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
-  }
-  if (Number.isNaN(div)) {
-    res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' });
-  } else {
-    res.status(200).json({ result: div });
-  } */
-
-  const num1 = parseInt(req.body.a);
-  const num2 = parseInt(req.body.b);
-  const div = numbers.divide(num1, num2);
-
-  if (num2 === 0) {
-    res.status(400).json({ error: 'Unable to divide by 0.' });
-  }
-  if (!req.body.a || !req.body.b) {
-    return req.body.a === 0
-      ? res.status(200).json({ result: div })
-      : res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
-  }
-  return Number.isNaN(div)
-    ? res.status(400).json({ error: 'Parameters "a" and "b" must be valid numbers.' })
-    : res.status(200).json({ result: div });
-});
 //----------------------------------------------------
 app.post('/numbers/remainder', (req, res) => {
-  const num1 = parseInt(req.body.a);
-  const num2 = parseInt(req.body.b);
-  const rem = numbers.remainder(num1, num2);
-
-  if (num2 === 0) {
-    res.status(400).json({ error: 'Unable to divide by 0.' });
-  }
-  if (!req.body.a || !req.body.b) {
-    return req.body.a === 0
-      ? res.status(200).json({ result: rem })
-      : res.status(400).json({ error: 'Parameters "a" and "b" are required.' });
-  }
-  return Number.isNaN(rem)
-    ? res.status(400).json({ error: 'Parameters must be valid numbers.' })
-    : res.status(200).json({ result: rem });
+ 
 
   /* const arr = Object.values(req.body);
   const rem = numbers.remainder(arr[0], arr[1]);
