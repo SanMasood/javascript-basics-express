@@ -42,4 +42,4 @@ Before you run a command make sure you do `npm start` in node.
 
 Copyright [Manchester Codes](https://github.com/MCRcodes). 
 Thank you Gaz, [Ian](https://github.com/ian-antking) & [Ersel](https://github.com/ersel) for your invaluable help.
-And to Romy for catching sneaky falsies.
+And to [Romy](https://github.com/anywhereiromy) for catching sneaky falsies.
