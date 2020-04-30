@@ -14,7 +14,7 @@ const multiply = (a, b) => {
 };
 
 const divide = (a, b) => {
-  // your code here
+
   return a/b;
 };
 
